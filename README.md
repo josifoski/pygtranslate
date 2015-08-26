@@ -9,4 +9,7 @@ pip3 install goslate
 
 
 # Usage
-Simply run the script with python3+
+Simply run the script with python3+  
+
+Author: Aleksandar Josifoski  
+twitter.com/adam222up  
