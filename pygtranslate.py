@@ -109,10 +109,17 @@ gs = goslate.Goslate()
 
 #using dictionaries for spellcheck
 try:
-    words=open("/usr/share/dict/american-english").read().split("\n")
+    #words=open("/usr/share/dict/american-english").read().split("\n")
+    
+    words1=open("/data/python_scripts/pygtranslate/american-english").read().split("\n")
+    words2=open("/data/python_scripts/pygtranslate/american-english-myextend").read().split("\n")
+    words = words1 + words2
+    
     dicton = True
 except:
     dicton = False
+
+#print(dicton)
 
 root = Tk()
 root.title("py google translator")
