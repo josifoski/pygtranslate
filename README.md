@@ -1,7 +1,7 @@
 # pygtranslate
 Python tkinter script using google translate web services and goslate module
   
-Spelling is included, you'll have to connect dict file in script. For example for us+en spelling on ubuntu there is /usr/share/dict/american-english file  
+Spelling is included, you'll have to connect dict files in script.   
   
 ## Dependancies  
 goslate  
@@ -9,8 +9,8 @@ pip3 install goslate
 
 
 ## Usage
-Simply run the script with python3+  
+Simply run the script with python3.4+  
 shortcut for translation is set to Ctrl + r
 
 Author: Aleksandar Josifoski  
-twitter.com/adam222up  
+about.me/josifsk  
