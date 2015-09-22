@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# created by Aleksandar Josifoski josifoski@gmail.com 2015-july
+# created by Aleksandar Josifoski about.me/josifsk 2015-september
 import sys
 import goslate
+import codecs
 from tkinter.font import *
 from tkinter import *
 from tkinter.ttk import Combobox
@@ -101,11 +102,20 @@ def spell(*args):
 
 
 def handler():
+    global sv
+    sv.close()
     root.destroy()
     sys.exit(0)
 
+def saving(*args):
+    global sv
+    s = textbox.get("1.0",END)
+    sv.write(s + '\n')
+    sv.write('----------\n')
+
 gs = goslate.Goslate()
 
+sv = codecs.open('pygtranslate_saved.txt', 'a', 'utf-8')
 
 #using dictionaries for spellcheck
 try:
@@ -128,6 +138,7 @@ bfr=Frame(root)
 tfr=Frame(root)
 
 root.bind('<Control-Key-r>', translate)
+root.bind('<Control-Key-s>', saving)
 
 button4 = Button(bfr, text='en2mk', command=en2mk)
 button4.pack(side=LEFT)
@@ -169,7 +180,8 @@ status.pack(side=BOTTOM, fill=X)
 S = Scrollbar(tfr)
 S.pack(side=RIGHT, fill=Y)
 customFont = Font(family="Helvetica", size=14 )
-textbox = Text(tfr, wrap=WORD, font=customFont, bg='white') #width=60
+#textbox = Text(tfr, wrap=WORD, font=customFont, bg='white') #width=60
+textbox = Text(tfr, wrap=WORD, font=customFont) #width=60
 textbox.pack(expand = 1, fill='both') #side=LEFT
 S.config(command=textbox.yview)
 textbox.config(yscrollcommand=S.set)
