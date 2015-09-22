@@ -10,7 +10,8 @@ pip3 install goslate
 
 ## Usage
 Simply run the script with python3.4+  
-shortcut for translation is set to Ctrl + r
-
+shortcut for translation is set to Ctrl + r  
+shortcut for continuous saving is used as editor Ctrl + s
+  
 Author: Aleksandar Josifoski  
 about.me/josifsk  
