@@ -84,7 +84,7 @@ def spell(*args):
         for lineind in range(len(ln)):
             ls = ln[lineind].split()
             for wordind in range(len(ls)):
-                if ls[wordind].strip('!"&\'()*,-./:;?[\]_{}«·»‑–—―‖‘’“”…′ \n#') not in words:
+                if ls[wordind].lower().strip('!"&\'()*,-./:;?[\]_{}«·»‑–—―‖‘’“”…′ \n#') not in words:
                     #lwrongsind.append(wordind)
                     lwrongs.append(ls[wordind])
 
@@ -124,6 +124,8 @@ try:
     words1=open("/data/python_scripts/pygtranslate/american-english").read().split("\n")
     words2=open("/data/python_scripts/pygtranslate/american-english-myextend").read().split("\n")
     words = words1 + words2
+    for itemind in range(len(words)):
+        words[itemind] = words[itemind].lower()
     
     dicton = True
 except:
