@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # created by Aleksandar Josifoski about.me/josifsk 2015-september
 import sys
 import goslate
+#from translate import Translator
 import codecs
 from tkinter.font import *
 from tkinter import *
 from tkinter.ttk import Combobox
-import sys
+
+# put correct path bellow where pygtranslate program is
+dirf = '/data/python_scripts/pygtranslate/'
+# put correct path bellow where american-english dictionary is, or use another dictionary for English or other language
+dirspell = '/data/rdgames/bctools/spellanalysis/'
+# don't forget to add forwardslash / as last character when defining directories
+
+try:
+    sv = codecs.open(dirf + 'pygtranslate_saved.txt', 'a', 'utf-8')
+except:
+    sv = codecs.open(dirf + 'pygtranslate_saved.txt', 'w', 'utf-8')
 
 langtoshort = { "Afrikaans":"af", "Albanian":"sq", "Arabic":"ar", "Azerbaijani":"az", "Basque":"eu", "Bengali":"bn", "Belarusian":"be",
 "Bulgarian":"bg", "Catalan":"ca", "Chinese Simplified":"zh-CN", "Chinese Traditional":"zh-TW", "Croatian":"hr", "Czech":"cs", "Danish":"da",
@@ -51,7 +61,10 @@ def translate(*args):
     iinput = textbox.get("1.0",END)
     ffrom = combo1.get()
     to = combo2.get()
+    #translator= Translator(from_lang=langtoshort[ffrom], to_lang=langtoshort[to])
+    #translation = str(translator.translate(iinput))
     textbox.insert(END, '\n\n' + gs.translate(iinput, langtoshort[to], langtoshort[ffrom]))
+    #textbox.insert(END, '\n\n' + translation)
 
 def clear(*args):
     textbox.delete(1.0, END)
@@ -84,9 +97,9 @@ def spell(*args):
         for lineind in range(len(ln)):
             ls = ln[lineind].split()
             for wordind in range(len(ls)):
-                if ls[wordind].lower().strip('!"&\'()*,-./:;?[\]_{}«·»‑–—―‖‘’“”…′ \n#') not in words:
-                    #lwrongsind.append(wordind)
-                    lwrongs.append(ls[wordind])
+                if ls[wordind].lower().strip('!"&\'()*,-./<>-_:;~?[\]_{}«·»‑–—―‖‘’“”…′ \n#') not in words:
+                    if not ls[wordind].lower().strip('!"&\'()*,-./<>-_:;~?[\]_{}«·»‑–—―‖‘’“”…′ \n#').replace(',','').replace('.','').isdigit():
+                        lwrongs.append(ls[wordind])
 
             for bart in lwrongs:
                 #leftind = s.find(bart)
@@ -115,18 +128,12 @@ def saving(*args):
 
 gs = goslate.Goslate()
 
-sv = codecs.open('pygtranslate_saved.txt', 'a', 'utf-8')
-
 #using dictionaries for spellcheck
 try:
-    #words=open("/usr/share/dict/american-english").read().split("\n")
-    
-    words1=open("/data/python_scripts/pygtranslate/american-english").read().split("\n")
-    words2=open("/data/python_scripts/pygtranslate/american-english-myextend").read().split("\n")
-    words = words1 + words2
+    words=open(dirspell + 'american-english').read().split("\n")
     for itemind in range(len(words)):
         words[itemind] = words[itemind].lower()
-    
+
     dicton = True
 except:
     dicton = False
@@ -162,6 +169,7 @@ combovar2 = langtupple
 combo2 = Combobox(bfr)
 combo2['values']=combovar2
 combo2.set('Macedonian')
+#translator= Translator(from_lang="en", to_lang="mk")
 combo2.bind('<<ComboboxSelected>>', secondlanguage)
 combo2.pack(side=LEFT)
 
