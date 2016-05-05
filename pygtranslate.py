@@ -86,6 +86,7 @@ def  en2sr(*args):
     combo2.set('Serbian')
 
 def spell(*args):
+    global dicton
     if dicton:
         global words
         lwrongs = []
